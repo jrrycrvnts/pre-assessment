@@ -1,0 +1,12 @@
+# Run postgres container
+docker run -d -v odoo-db:/var/lib/postgresql/data -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
+
+# Clone your repository
+git clone https://github.com/your-username/library.git
+
+# Run odoo container
+docker run -v ./library:/mnt/extra-addons \
+     --name odoo \
+     -p 8069:8069 \
+     --link db:db \
+     -t odoo:17
